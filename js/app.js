@@ -23,16 +23,36 @@ const displayPhone = (brand) => {
            <h6>Name: ${brands.phone_name}</h6>
             <h5>Brand: ${brands.brand}</h5>
          </div>
-         <button onclick='singlePhoen("${`  https://openapi.programming-hero.com/api/phone//${brands.staus}`}")'" class="btn btn-primary mb-4 mx-4">Details</button>
+         <button onclick='singlePhoen("${brands.slug}")' class="btn btn-primary mb-4 mx-4">Details</button>
         </div>
         `
         searchResult.appendChild(div)
     }
 }
 const singlePhoen = (info) => {
-    const url = ` https://openapi.programming-hero.com/api/phone/${info}`
-    console.log(url)
-    console.log(info,'ok')
+    // console.log(info)
+    const url = `https://openapi.programming-hero.com/api/phone/${info}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => phoneDetails(data))
+    document.getElementById('phone-details').innerHTML = ''
+}
+
+const phoneDetails =(phoneId) =>{
+    console.log(phoneId)
+    const phoneDiv = document.getElementById('phone-details');
+    const div = document.createElement('div')
+    // div.classList.add('card')
+    div.innerHTML = `
+    <img class=" rounded mx-auto d-block w-50" src="${phoneId.data.image}" class="card-img-top" alt="...">
+    <div class="card-body">
+    <p>mainFeatures</p>
+      <h5 class="card-title">mainFeature: ${phoneId.data.mainFeatures.storage}</h5>
+      <p class="card-text">${phoneId.others}</p>
+      <h3>releasDate: ${phoneId.relaseDate}</h3>
+    </div>
+    `
+    phoneDiv.appendChild(div)
 }
 
     
