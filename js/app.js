@@ -5,10 +5,19 @@ const searchPhone = () => {
     const searchText = searchField.value;
     searchField.value ='';
     // console.log(searchText)
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+    if(searchText == '') {
+       document.getElementById('error-message').style.display = 'block'
+    }
+    else if(searchText.status == false){
+        document.getElementById('error-message').style.display = 'block'
+    }
+    else{
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
     .then(res => res.json())
     .then(data =>displayPhone(data.data))
+    }
+    
 }
 
   const displayPhone = (brand) => { 
@@ -31,10 +40,15 @@ const searchPhone = () => {
 }
 const singlePhoen = (info) => {
     // console.log(info)
-    const url = `https://openapi.programming-hero.com/api/phone/${info}`
+    if(!info.status == true){
+        const url = `https://openapi.programming-hero.com/api/phone/${info}`
     fetch(url)
     .then(res => res.json())
     .then(data => phoneDetails(data))
+    }
+    else{
+        document.getElementById('error-message').style.display ='block'
+    }
     document.getElementById('phone-details').innerHTML = ''
 }
 
@@ -42,7 +56,6 @@ const phoneDetails =(phoneId) =>{
     console.log(phoneId)
     const phoneDiv = document.getElementById('phone-details');
     const div = document.createElement('div')
-    // div.classList.add('card')
     div.innerHTML = `
     <div class="">
     <div>

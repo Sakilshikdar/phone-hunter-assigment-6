@@ -1,0 +1,8 @@
+.body-class{
+    background-color:rgb(245, 248, 250) 
+}
+#error-message{
+ display: none;  
+ color: rebeccapurple;
+ text-align: center; 
+}
