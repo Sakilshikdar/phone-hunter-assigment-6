@@ -1,5 +1,6 @@
 const searchPhone = () => {
     document.getElementById('search-result').innerHTML = '';
+    document.getElementById('phone-details').innerHTML = ''
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value;
     searchField.value ='';
@@ -10,11 +11,10 @@ const searchPhone = () => {
     .then(data =>displayPhone(data.data))
 }
 
-const displayPhone = (brand) => {
-    // console.log(brand)
+  const displayPhone = (brand) => { 
+      const data = brand.slice(0, 20);
     const searchResult = document.getElementById('search-result')
-    for(const brands of brand){
-        // console.log(brands)
+   for(const brands of data){
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
@@ -44,12 +44,21 @@ const phoneDetails =(phoneId) =>{
     const div = document.createElement('div')
     // div.classList.add('card')
     div.innerHTML = `
-    <img class=" rounded mx-auto d-block w-50" src="${phoneId.data.image}" class="card-img-top" alt="...">
+    <div class="">
+    <div>
+    <img class=" rounded mx-auto d-block img-fluid" src="${phoneId.data.image}" class="card-img-top" alt="...">
+    </div>
     <div class="card-body">
-    <p>mainFeatures</p>
-      <h5 class="card-title">mainFeature: ${phoneId.data.mainFeatures.storage}</h5>
-      <p class="card-text">${phoneId.others}</p>
-      <h3>releasDate: ${phoneId.relaseDate}</h3>
+    <h6>Name: ${phoneId.data.name}</h6>
+    <h6>ReleasDate: ${phoneId.data.releaseDate}</h6>
+      <h5 class="card-title text-primary">mainFeature:</h5>
+      <P>ChipSet: ${phoneId.data.mainFeatures.chipSet}</p>
+      <P>Displaysize: ${phoneId.data.mainFeatures.displaySize}</p>
+      <P>Memory: ${phoneId.data.mainFeatures.memory}</p>
+      <h5 class="card-title text-primary">Others:</h5>
+      <p>Bluetooth: ${phoneId.data.others.Bluetooth}</p>
+      <p>USB: ${phoneId.data.others.USB}</p>
+    </div>
     </div>
     `
     phoneDiv.appendChild(div)
