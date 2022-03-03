@@ -30,12 +30,14 @@ const displayPhone = (brand) => {
             const div = document.createElement('div')
             // div.classList.add('col')
             div.innerHTML = `
+            <div class = 'shadow-lg p-3 mb-5 bg-body rounded-3'>
             <img src="${brands.image}" class="w-75 card-img-top" alt="...">
-            <div class="card-body">
+            <div class=" card-body">
               <h6>Name: ${brands.phone_name}</h6>
                <h5>Brand: ${brands.brand}</h5>
             </div>
             <button onclick='singlePhoen("${brands.slug}")' class="btn btn-primary mb-4 mx-4">Details</button>
+            </div>
             `
             searchResult.appendChild(div)
         }   
@@ -53,7 +55,7 @@ const phoneDetails =(phoneId) =>{
     const phoneDiv = document.getElementById('phone-details');
     const div = document.createElement('div')
     div.innerHTML = `
-    <div class="card mb-3 mx-auto" style="max-width: 700px;">
+    <div class=" shadow p-3 mb-5 bg-body rounded-3 card mx-auto" style="max-width: 700px;">
   <div class="row g-3">
     <div class="col-md-4">
       <img src="${phoneId.data.image}" class="w-100 mt-5 rounded-start" alt="...">
