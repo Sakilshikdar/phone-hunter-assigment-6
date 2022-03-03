@@ -1,3 +1,5 @@
+// searchField////
+
 const searchPhone = () => {
     document.getElementById('search-result').innerHTML = '';
     document.getElementById('phone-details').innerHTML = '';
@@ -14,6 +16,8 @@ const searchPhone = () => {
     .then(data => displayPhone (data))
     } 
 }
+
+// all phone data //////
 
 const displayPhone = (brand) => { 
     console.log(brand)
@@ -43,6 +47,8 @@ const displayPhone = (brand) => {
         }   
     }  
 }
+// single phone details //////
+
 const singlePhoen = (info) => {
         const url = `https://openapi.programming-hero.com/api/phone/${info}`
     fetch(url)
