@@ -4,7 +4,6 @@ const searchPhone = () => {
     const searchField = document.getElementById('search-field')
     const searchText = searchField.value;
     searchField.value ='';
-    // console.log(searchText)
     if(searchText == '') {
        document.getElementById('error-message').style.display = 'block'
     }
@@ -43,7 +42,6 @@ const displayPhone = (brand) => {
     }  
 }
 const singlePhoen = (info) => {
-    console.log(info)
         const url = `https://openapi.programming-hero.com/api/phone/${info}`
     fetch(url)
     .then(res => res.json())
@@ -52,22 +50,31 @@ const singlePhoen = (info) => {
 }
 
 const phoneDetails =(phoneId) =>{
-    // console.log(phoneId)
     const phoneDiv = document.getElementById('phone-details');
     const div = document.createElement('div')
     div.innerHTML = `
-    <img class=" rounded mx-auto d-block img-fluid" src="${phoneId.data.image}" class="card-img-top" alt="...">
-    <div class="card-body">
-    <h6>Name: ${phoneId.data.name}</h6>
+    <div class="card mb-3 mx-auto" style="max-width: 700px;">
+  <div class="row g-3">
+    <div class="col-md-4">
+      <img src="${phoneId.data.image}" class="w-100 mt-5 rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h6>Name: ${phoneId.data.name}</h6>
      <h6>ReleasDate:${phoneId.data.releaseDate ? phoneId.data.releaseDate : ' coming soon'}</h6>
       <h5 class="card-title text-primary">mainFeature:</h5>
       <P>ChipSet: ${phoneId.data.mainFeatures.chipSet}</p>
       <P>Displaysize: ${phoneId.data.mainFeatures.displaySize}</p>
       <P>Memory: ${phoneId.data.mainFeatures.memory}</p>
+      <h6 ><span class ='text-primary'>Sensore:</span> ${phoneId.data.mainFeatures.sensors ? phoneId.data.mainFeatures.sensors : 'no info found'}</h6>
       <h5 class="card-title text-primary">Others:</h5>
         <p>Bluetooth: ${(phoneId.data.others ) == undefined ?'no info found':phoneId.data.others.Bluetooth}</p>
         <p>USB: ${(phoneId.data.others ) == undefined ?'no info found':phoneId.data.others.USB}</p>
+      </div>
     </div>
+  </div>
+</div>
+
     `
     phoneDiv.appendChild(div)
 }
